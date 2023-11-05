@@ -1,0 +1,27 @@
+[
+    {
+      "id": 1,
+      "category_name": "Science Fiction",
+      "img": "https://i.ibb.co/Jn7yS6R/23-science-fiction-and-fantasy-book-covers-that-are-out-of-this-world-99designs.jpg",
+      "button": "Our Books"
+    },
+    {
+      "id": 2,
+      "category_name": "Travel",
+      "img": "https://i.ibb.co/VY8qHbq/The-Art-Of-Black-And-White-Photography-Bored-Art.jpg",
+      "button": "Our Books"
+    },
+    {
+      "id": 3,
+      "category_name": "Thriller",
+      "img": "https://i.ibb.co/1JcsGmB/The-Best-New-Thriller-Books.jpg",
+      "button": "Our Books"
+    },
+    {
+      "id": 4,
+      "category_name": "Fantasy",
+      "img": "https://i.ibb.co/7JYzp1h/19-of-the-Best-Science-Fiction-and-Fantasy-Books-Coming-This-Summer.jpg",
+      "button": "Our Books"
+    }
+  ]
+  
