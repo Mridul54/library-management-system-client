@@ -1,6 +1,70 @@
+import { Link, useNavigate } from "react-router-dom";
 import login from "../../assets/login.jpeg"
+import { useContext, useState } from "react";
+import { AuthContext } from "../../Provider/AuthProvider";
+import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
+import Swal from "sweetalert2";
 
 const Registration = () => {
+
+    const {createUser} = useContext(AuthContext);
+    const [registrationError, setRegistrationError] = useState('');
+    const [registrationSuccess, setRegistrationSuccess] = useState(false);
+    const navigate = useNavigate();
+    const auth = getAuth();
+    
+
+    const handleSignUp = async(event) => {
+        event.preventDefault();
+        const form = event.target;
+        const name = form.name.value;
+        const email = form.email.value;
+        const password = form.password.value;
+        console.log(name, email, password);
+
+        setRegistrationError('');
+        setRegistrationSuccess(false);
+
+
+        const specialCharRegex = /[!@#$%^&*()_+[\]{};':"\\|,.<>?]+/;
+
+        if (!/[A-Z]/.test(password)) {
+            setRegistrationError('Password must contain at least one uppercase letter');
+            return;
+        }
+
+        if (!specialCharRegex.test(password)) {
+            setRegistrationError('Password must contain at least one special character');
+            return;
+        }
+
+
+        createUser(email, password, name)
+           .then(() => {
+               console.log('Registration successful');
+               setRegistrationSuccess(true);
+               navigate('/login')
+           })
+           .catch(error => {
+               console.error(error);
+               setRegistrationError(error.message);
+           })
+    }
+
+    const handleGoogleSignIn = () => {
+        const provider = new GoogleAuthProvider();
+
+        signInWithPopup(auth,provider)
+           .then((result) => {
+            console.log('Google sign up successful', result);
+            navigate('/');
+            Swal.fire('Successfully Register!')
+           })
+           .catch((error) => {
+            console.log('Google siggn up error', error);
+           });
+    }
+
     return (
         <div className="w-full h-full flex items-start">
             <div className="relative w-1/2 h-full flex flex-col">
@@ -17,27 +81,32 @@ const Registration = () => {
                 <div className="w-full flex flex-col max-w-[450px]">
                     <div className="w-full flex flex-col my-10 text-center">
                         <h3 className="text-3xl font-semibold mb-4">Sign Up</h3>
-                        <p className="text-base mb-2">Welcome Back! Registration now!</p>
+                        <p className="text-base mb-2">Welcome! Registration now!</p>
                     </div>
-                    <div className="flex flex-col w-full">
-                        <input type="name" name="name" placeholder="Your name" id="name" className="w-full text-black py-2 border-b border-black outline-none focus:outline-none bg-transparent my-4" />
-                        <input type="email" name="email" placeholder="Your email address" id="email" className="w-full text-black py-2 border-b border-black outline-none focus:outline-none bg-transparent my-4" />
+                    <form onSubmit={handleSignUp}>
+                        <div className="form-control flex flex-col w-full">
+                            <input type="name" name="name" placeholder="Your name" id="name" className="w-full text-black py-2 border-b border-black outline-none focus:outline-none bg-transparent my-4" />
+                            <input type="email" name="email" placeholder="Your email address" id="email" className="w-full text-black py-2 border-b border-black outline-none focus:outline-none bg-transparent my-4" />
 
-                        <input type="password" name="password" placeholder="Password" id="password" className="w-full text-black py-2 border-b border-black outline-none focus:outline-none bg-transparent my-2" />
+                            <input type="password" name="password" placeholder="Password" id="password" className="w-full text-black py-2 border-b border-black outline-none focus:outline-none bg-transparent my-2" />
 
-                    </div>
-                   
-                    <div className="w-full flex flex-col my-4">
-                        <button className="w-full bg-black text-white rounded-md p-4 text-center flex items-center justify-center">Sign Up</button>
+                        </div>
+                    
+                        <div className="form-control w-full flex flex-col my-4">
+                            
+                            <input className="w-full bg-black text-white rounded-md p-4 text-center flex items-center justify-center" type="submit" value="Sign up" />
 
-                    </div>
+                        </div>
+                    </form>
+                    {registrationError && <p className="text-emerald-700 m-auto">{registrationError}</p>}
+                    {registrationSuccess && <p className="text-emerald-700 m-auto">Registration Successful</p>}
                     <div className="w-full flex items-center justify-center relative py-6 mt-2">
                         <div className="w-full h-[1px] bg-black"></div>
                         <p className="text-xl absolute text-black/80 bg-[#f5f5f5]">or sign up with</p>
                     </div>
                     <div className="flex items-center mt-6 -mx-2 mb-10">
                     <button
-                    
+                        onClick={handleGoogleSignIn}
                         type="button"
                         className="flex items-center justify-center w-full px-6 py-2 mx-2 text-sm font-medium text-white transition-colors duration-300 transform bg-blue-500 rounded-lg hover:bg-blue-400 focus:bg-blue-400 focus:outline-none"
                     >
@@ -49,7 +118,7 @@ const Registration = () => {
                 </div>
                 </div>
                 <div className="w-full flex items-center justify-center mb-12">
-                    <p className="text-md font-normal text-black"> have an account? <span className="font-semibold underline underline-offset-2 cursor-pointer">Login</span></p>
+                    <p className="text-md font-normal text-black">Already have an account? <Link className="font-semibold underline underline-offset-2 cursor-pointer" to="/login">Login</Link></p>
                 </div>
             </div>
             

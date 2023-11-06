@@ -1,6 +1,50 @@
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import login from "../../assets/login.jpeg"
+import { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../../Provider/AuthProvider";
+import Swal from "sweetalert2";
 
 const Login = () => {
+
+    const {signIn} = useContext(AuthContext);
+
+    const [signInSuccess, setSignInSuccess] = useState(false);
+    const [signInError, setSignInError] = useState(null);
+    const location = useLocation();
+    const Navigate = useNavigate();
+
+    useEffect(() => {
+        if(signInSuccess) {
+            const timer = setTimeOut(() => {
+                setSignInSuccess(false);
+                Navigate(location?.state ? location.state : '/');
+            }, 3000);
+            return() => clearTimeout(timer);
+        }
+    }, [signInSuccess, location, Navigate]);
+
+    const handleLogin = event => {
+        event.preventDefault();
+        const form = event.target;
+        const email = form.email.value;
+        const password = form.password.value;
+        console.log(email, password);
+
+        signIn(email, password)
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+                setSignInSuccess(true);
+                setSignInError(null);
+                event.target.reset();
+                Swal.fire('Successfully Login!')
+            })
+            .catch(error => {
+                console.error(error);
+                setSignInSuccess(false);
+                setSignInError('Invalid email or password, Please try again');
+            });
+    }
     return (
         <div className="w-full h-full flex items-start">
             <div className="relative w-1/2 h-full flex flex-col">
@@ -19,24 +63,37 @@ const Login = () => {
                         <h3 className="text-3xl font-semibold mb-4">Login</h3>
                         <p className="text-base mb-2">Welcome Back! Please enter your details</p>
                     </div>
-                    <div className="flex flex-col w-full">
-                        <input type="email" name="email" placeholder="Your email address" id="email" className="w-full text-black py-2 border-b border-black outline-none focus:outline-none bg-transparent my-4" />
-
-                        <input type="password" name="password" placeholder="Password" id="password" className="w-full text-black py-2 border-b border-black outline-none focus:outline-none bg-transparent my-2" />
-
+                    {signInSuccess && !signInError ? (
+                        <div className="bg-green-200 p-3 text-green-800 mb-4 rounded-md">
+                        Successfully logged in!
                     </div>
-                    <div className=" w-full flex items-center justify-between my-5">
-                        <div className="w-full flex items-center">
-                            <input type="checkbox" name="checkbox" id="checkbox" className="w-4 mr-2" />
-                            <p className="text-sm">Remember me</p>
+                    ) : null}
+                    {signInError ? (
+                        <div className="bg-red-200 p-3 text-red-800 mb-4 rounded-md">
+                           {signInError}
+                    </div>
+                    ) : null}
+                    <form onSubmit={handleLogin}>
+                        <div className="form-control flex flex-col w-full">
+                            <input type="email" name="email" placeholder="Your email address" id="email" className="w-full text-black py-2 border-b border-black outline-none focus:outline-none bg-transparent my-4" />
+
+                            <input type="password" name="password" placeholder="Password" id="password" className="w-full text-black py-2 border-b border-black outline-none focus:outline-none bg-transparent my-2" />
+
                         </div>
-                        <p className="text-sm font-medium whitespace-nowrap cursor-pointer underline underline-offset-2">Forget Password?</p>
+                        <div className=" w-full flex items-center justify-between my-5">
+                            <div className="w-full flex items-center">
+                                <input type="checkbox" name="checkbox" id="checkbox" className="w-4 mr-2" />
+                                <p className="text-sm">Remember me</p>
+                            </div>
+                            <p className="text-sm font-medium whitespace-nowrap cursor-pointer underline underline-offset-2">Forget Password?</p>
 
-                    </div>
-                    <div className="w-full flex flex-col my-4">
-                        <button className="w-full bg-black text-white rounded-md p-4 text-center flex items-center justify-center">Login</button>
+                        </div>
+                        <div className="form-control w-full flex flex-col my-4">
+                            
+                            <input  className="w-full bg-black text-white rounded-md p-4 text-center flex items-center justify-center" type="submit" value="Login" />
 
-                    </div>
+                        </div>
+                    </form>
                     <div className="w-full flex items-center justify-center relative py-6 mt-2">
                         <div className="w-full h-[1px] bg-black"></div>
                         <p className="text-xl absolute text-black/80 bg-[#f5f5f5]">or sign in with</p>
@@ -55,7 +112,7 @@ const Login = () => {
                 </div>
                 </div>
                 <div className="w-full flex items-center justify-center mb-16">
-                    <p className="text-md font-normal text-black">Do not have an account? <span className="font-semibold underline underline-offset-2 cursor-pointer">Sign up</span></p>
+                    <p className="text-md font-normal text-black">Do not have an account? <Link className="font-semibold underline underline-offset-2 cursor-pointer" to="/registration">Sign up</Link></p>
                 </div>
             </div>
             
