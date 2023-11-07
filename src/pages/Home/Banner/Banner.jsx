@@ -8,12 +8,12 @@ const Banner = () => {
         <div className="carousel w-full h-[600px]">
              
             <div id="slide1" className="carousel-item relative w-full">
-                <img src={img2} className="w-full rounded-xl" />
+                <img src={img2} className="w-96 lg: lg:w-full rounded-xl" />
                 <div className="absolute rounded-xl flex items-center h-full left-0 top-0 bg-gradient-to-r from-[#151515] to-[rgba(21, 21, 21, 0.00)]">
                     <div className="text-white space-y-7 w-1/2 pl-12">
-                        <h2 className="text-6xl font-bold">
+                        <h2 className="text-base lg:text-6xl font-bold">
                         Books open doors to new worlds and endless possibilities.</h2>
-                        <p> Libraries are havens of knowledge, where the past and present coexist in the form of books, offering boundless opportunities for learning and exploration.</p>
+                        <p className="lg:text-base hidden"> Libraries are havens of knowledge, where the past and present coexist in the form of books, offering boundless opportunities for learning and exploration.</p>
                         <div className="">
                             <button className="btn btn-outline btn-info  mr-5">Discover More </button>
                             

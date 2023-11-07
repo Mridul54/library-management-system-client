@@ -2,6 +2,7 @@
 
 const CategoryCard = ({category}) => {
     const {category_name, img, button} = category;
+    
     return (
         <div className="card card-side bg-base-100 shadow-xl mt-10">
             <figure><img className="h-[500px] w-96 " src={img} alt="Movie"/></figure>
