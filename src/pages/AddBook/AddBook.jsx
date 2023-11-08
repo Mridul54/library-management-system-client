@@ -86,8 +86,8 @@ const AddBook = () => {
                         <span className="label-text font-semibold text-xl">Category</span>
                     </label>
                     <label className="input-group">
-                        
                         <input type="text" placeholder="Category" name="category" className="input input-bordered w-full" />
+                        
                     </label>
                 </div>
             </div>
