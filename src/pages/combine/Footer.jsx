@@ -2,7 +2,7 @@ import logo from "../../assets/Book Store.jpeg"
 
 const Footer = () => {
     return (
-        <footer className="footer p-10 bg-base-200 text-base-content">
+        <footer className="footer p-10 bg-slate-300 text-base-content">
             <aside>
                 <img className="h-20" src={logo} alt="" />
                 <p>Library Management System<br/>Providing reliable education center since 1992</p>

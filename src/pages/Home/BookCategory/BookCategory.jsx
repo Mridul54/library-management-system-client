@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import CategoryCard from "./categoryCard";
+import { Link } from "react-router-dom";
 
 
 const BookCategory = () => {
@@ -10,6 +11,7 @@ const BookCategory = () => {
         .then(res => res.json())
         .then(data => setBookCategory(data))
     }, [])
+    console.log(bookCategory)
     return (
         <div className='text-center my-16'>
             <div>
@@ -20,9 +22,9 @@ const BookCategory = () => {
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {
-                        bookCategory.map(category => <CategoryCard 
-                            key={category.id} 
-                            category={category}></CategoryCard>)
+                        bookCategory.map((category) => <><Link to={`/book-category/${category.category_name}`}><CategoryCard 
+                        key={category.id} 
+                        category={category}></CategoryCard></Link></>)
                     }
                 </div>
             </div>

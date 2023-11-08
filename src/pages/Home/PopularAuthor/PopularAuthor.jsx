@@ -1,4 +1,4 @@
-import React from 'react';
+
 import author1 from "../../../assets/American-writer-George-RR-Martin-2011.webp";
 import author2 from "../../../assets/8cigckin175jtpsk3gs361r4ss._SY300_.jpg";
 import author3 from "../../../assets/1677785736.png";
