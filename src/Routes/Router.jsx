@@ -53,7 +53,7 @@ const router = createBrowserRouter([
         },
         {
           path: '/details/:id',
-          element:<Details></Details>,
+          element:<PrivateRoute><Details></Details></PrivateRoute>,
           loader: ({params})=> fetch(`https://library-management-system-server-6appjq3so-mridul544564.vercel.app/book/Science-fiction/${params.id}`)
         }
       ]
