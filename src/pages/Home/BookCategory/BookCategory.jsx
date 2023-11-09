@@ -7,7 +7,7 @@ const BookCategory = () => {
     const [bookCategory, setBookCategory] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:5000/category')
+        fetch('https://library-management-system-server-6appjq3so-mridul544564.vercel.app/category')
         .then(res => res.json())
         .then(data => setBookCategory(data))
     }, [])

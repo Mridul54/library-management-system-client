@@ -1,18 +1,14 @@
-
 import { useLoaderData } from 'react-router-dom';
 import Detail from './Detail';
-import { useEffect, useState } from 'react';
 
 const Details = () => {
-    const [bookDetails, setBookDetails] = useState([])
-    useEffect(() => {
-        fetch()
-    }, [])
+    const details = useLoaderData();
+
+    console.log(details);
+
     return (
         <div>
-            {
-                detail.map((detail) => <Detail key={detail.id} detail={detail}></Detail>)
-            }
+            <Detail key={details._id} detail={details}></Detail>
         </div>
     );
 };

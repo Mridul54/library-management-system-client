@@ -27,12 +27,12 @@ const router = createBrowserRouter([
         {
           path:'updateBook/:id',
           element: <UpdateBook></UpdateBook>,
-          loader: ({params}) => fetch(`http://localhost:5000/book/${params.id}`)
+          loader: ({params}) => fetch(`https://library-management-system-server-6appjq3so-mridul544564.vercel.app/book/${params.id}`)
         },
         {
           path: 'allBooks',
           element: <PrivateRoute><AllBooks></AllBooks></PrivateRoute>,
-          loader: () => fetch('http://localhost:5000/book')
+          loader: () => fetch('https://library-management-system-server-6appjq3so-mridul544564.vercel.app/book')
         },
         {
           path: 'borrowedBooks',
@@ -49,12 +49,12 @@ const router = createBrowserRouter([
         {
           path:'/book-category/:category_name',
           element: <PrivateRoute><Books></Books></PrivateRoute>,
-          loader: ({params}) => fetch(`http://localhost:5000/book/${params.category_name}`)
+          loader: ({params}) => fetch(`https://library-management-system-server-6appjq3so-mridul544564.vercel.app/book/${params.category_name}`)
         },
         {
           path: '/details/:id',
           element:<Details></Details>,
-          loader: ({params})=> fetch(`http://localhost:5000/book/Science-fiction/${params.id}`)
+          loader: ({params})=> fetch(`https://library-management-system-server-6appjq3so-mridul544564.vercel.app/book/Science-fiction/${params.id}`)
         }
       ]
     },
