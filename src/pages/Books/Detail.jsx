@@ -33,12 +33,12 @@ const Detail = ({ detail }) => {
                 <button className="btn btn-outline btn-info" onClick={()=>document.getElementById('my_modal_5').showModal()}>Borrow</button>
                 <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
                 <div className="modal-box">
-                    <h3 className="font-bold text-lg">Hello!</h3>
-                    <p className="py-4">Press ESC key or click the button below to close</p>
+                    <h3 className="font-bold text-lg">Borrow Date</h3>
+                    <input className="border" type="date" name="" id="" />
                     <div className="modal-action">
                     <form method="dialog">
                         {/* if there is a button in form, it will close the modal */}
-                        <button className="btn">Close</button>
+                        <button className="btn btn-outline btn-info">Submit</button>
                     </form>
                     </div>
                 </div>

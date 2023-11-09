@@ -45,7 +45,7 @@ const UpdateBook = () => {
 
 
     return (
-        <div className="bg-sky-200 p-24 mt-10 max-w-5xl mx-auto">
+        <div className="bg-sky-200 p-24 my-20 max-w-5xl mx-auto">
         <h2 className="text-5xl font-bold text-center pb-10 ">Update Book: {name}</h2>
         <form onSubmit={handleUpdateBook}>
         <div className="form-control md:w-full">
