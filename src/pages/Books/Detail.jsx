@@ -24,7 +24,7 @@ const Detail = ({ detail }) => {
                     <div className="modal-action">
                     <form method="dialog">
                         {/* if there is a button, it will close the modal */}
-                        <button className="btn btn-outline btn-info">Close</button>
+                        <button className="btn btn-outline btn-info">Back</button>
                     </form>
                     </div>
                 </div>
